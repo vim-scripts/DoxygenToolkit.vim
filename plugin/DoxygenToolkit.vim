@@ -456,6 +456,7 @@ function! <SID>DoxygenLicenseFunc()
     exec "normal %jA".l:date." - ".g:DoxygenToolkit_authorName
   endif
   exec "normal =%`d"
+  mark d
 
   call s:RestoreParameters()
 endfunction
@@ -495,6 +496,7 @@ function! <SID>DoxygenAuthorFunc()
 
   " Move the cursor to the rigth position
   exec "normal =%`d"
+  mark d
 
   call s:RestoreParameters()
   startinsert!
@@ -523,6 +525,7 @@ function! <SID>DoxygenUndocumentFunc(blockTag)
   endwhile
 
   exec "normal =%`d"
+  mark d
   call s:RestoreParameters()
 endfunction
 
@@ -544,6 +547,7 @@ function! <SID>DoxygenBlockFunc()
   exec "normal A".strpart( s:startCommentTag, 1 )." @} ".s:endCommentTag
   exec "set nopaste"
   exec "normal =%`d"
+  mark d
 
   call s:RestoreParameters()
   startinsert!
@@ -820,6 +824,7 @@ function! <SID>DoxygenCommentFunc()
     exec "normal A".strpart( s:startCommentBlock, 1 ).g:DoxygenToolkit_blockFooter.s:endCommentBlock
   endif
   exec "normal =%`d"
+  mark d
 
   call s:RestoreParameters()
   if( s:compactOneLineDoc =~ "yes" && s:endCommentTag != "" )
