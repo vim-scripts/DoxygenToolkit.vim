@@ -455,7 +455,8 @@ function! <SID>DoxygenLicenseFunc()
   if( g:DoxygenToolkit_licenseTag == s:licenseTag )
     exec "normal %jA".l:date." - ".g:DoxygenToolkit_authorName
   endif
-  exec "normal `d"
+  exec "normal =%`d"
+  delmarks d
 
   call s:RestoreParameters()
 endfunction
@@ -494,7 +495,8 @@ function! <SID>DoxygenAuthorFunc()
   endif
 
   " Move the cursor to the rigth position
-  exec "normal `d"
+  exec "normal =%`d"
+  delmarks d
 
   call s:RestoreParameters()
   startinsert!
@@ -522,7 +524,8 @@ function! <SID>DoxygenUndocumentFunc(blockTag)
     endif
   endwhile
 
-  exec "normal `d"
+  exec "normal =%`d"
+  delmarks d
   call s:RestoreParameters()
 endfunction
 
@@ -534,13 +537,17 @@ endfunction
 function! <SID>DoxygenBlockFunc()
   call s:InitializeParameters()
 
+  exec "set paste"
   let l:insertionMode = s:StartDocumentationBlock()
   exec "normal ".l:insertionMode.s:interCommentTag.g:DoxygenToolkit_blockTag
   mark d
   exec "normal o".s:interCommentTag."@{ ".s:endCommentTag
+  exec "normal =%2j"
   exec "normal o".strpart( s:startCommentTag, 0, 1 )
   exec "normal A".strpart( s:startCommentTag, 1 )." @} ".s:endCommentTag
-  exec "normal `d"
+  exec "set nopaste"
+  exec "normal =%`d"
+  delmarks d
 
   call s:RestoreParameters()
   startinsert!
@@ -816,7 +823,8 @@ function! <SID>DoxygenCommentFunc()
     exec "normal o".strpart( s:startCommentBlock, 0, 1 )
     exec "normal A".strpart( s:startCommentBlock, 1 ).g:DoxygenToolkit_blockFooter.s:endCommentBlock
   endif
-  exec "normal `d"
+  exec "normal =%`d"
+  delmarks d
 
   call s:RestoreParameters()
   if( s:compactOneLineDoc =~ "yes" && s:endCommentTag != "" )
