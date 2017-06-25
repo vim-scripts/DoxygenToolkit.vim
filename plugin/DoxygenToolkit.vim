@@ -493,7 +493,7 @@ function! <SID>DoxygenAuthorFunc()
     exec "normal o".s:endCommentTag
   endif
 
-  " Move the cursor to the rigth position
+  " Move the cursor to the right position
   exec "normal `d"
 
   call s:RestoreParameters()
