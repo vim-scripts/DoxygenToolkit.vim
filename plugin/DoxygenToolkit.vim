@@ -552,6 +552,9 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! <SID>DoxygenCommentFunc()
 
+  " Prevent autoindent from placing too much indentation when placing spaces in manual configuration
+  set noautoindent
+
   " Initialize default templates.
   " Assure compatibility with Python for classes (cf. endDocPattern).
   let l:emptyLinePattern = '^[[:blank:]]*$'
@@ -838,6 +841,8 @@ function! <SID>DoxygenCommentFunc()
   "    call s:WarnMsg( "   - ".param )
   "  endfor
   "endif
+
+  set autoindent
 
 endfunction
 
