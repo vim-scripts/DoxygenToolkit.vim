@@ -514,7 +514,7 @@ function! <SID>DoxygenUndocumentFunc(blockTag)
 
   while ( search(l:search, 'W') != 0 )
     exec "normal O#ifndef " . g:DoxygenToolkit_undocTag
-    exec "normal j^%"
+    exec "+1^%"
     if ( g:DoxygenToolkit_endCommentTag == "" )
       exec "normal o#endif // " . g:DoxygenToolkit_undocTag 
     else
@@ -593,7 +593,7 @@ function! <SID>DoxygenCommentFunc()
   " Look for function/method/... to document
   " We look only on the first three lines!
   while( match( l:lineBuffer, l:emptyLinePattern ) != -1 && l:count < 4 )
-    exec "normal j"
+    exec "+1"
     let l:lineBuffer = l:lineBuffer.' '.getline( line( "." ) )
     let l:count = l:count + 1
   endwhile
@@ -636,7 +636,7 @@ function! <SID>DoxygenCommentFunc()
       endif
       continue
     endif
-    exec "normal j"
+    exec "+1"
     let l:lineBuffer = l:lineBuffer.' '.getline( line( "." ))
     let l:count = l:count + 1
   endwhile
